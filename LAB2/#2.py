@@ -50,9 +50,9 @@ for emp in employees:
         best_employee=emp
     if emp['salary']>average:
         avg_employees.append(emp)
-print(f"\nОбщая средняя зарплата: {average:.2f}\n")
-print(f"Отдел с самой высокой средней зарплатой: {best_department}\n")
-print(f"Самый высокооплачиваемый сотрудник: {best_employee['name']} ({best_employee['salary']})")
+print("Общая средняя зарплата:"+str(average)+"\n")
+print("Отдел с самой высокой средней зарплатой:"+str(best_department)+"\n")
+print("Самый высокооплачиваемый сотрудник:"+str(best_employee['name'])+" - "+ str(best_employee['salary'])+"\n")
 with open('high_salary.csv', mode='w', encoding='utf-8', newline='') as f:
     writer = csv.DictWriter(f, fieldnames=['name', 'department', 'salary'])
     writer.writeheader()

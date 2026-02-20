@@ -35,10 +35,10 @@ for user,count in users_count.items():
     if count>3:
         suspicious_users.add(user)
 with open('report.txt', 'w',encoding='utf-8') as file:
-    file.write(f"Подозрительных транзакций:{len(suspicious_operations)}\n")
-    file.write(f"Подозрительных пользователей:{len(suspicious_users)}\n")
-    file.write(f"Список пользователей:{', '.join(suspicious_users)}\n")
-    file.write(f"Общая сумма подозрительных операций: {total_s_operations}\n")
+    file.write("Подозрительных транзакций:"+str(len(suspicious_operations))+"\n")
+    file.write("Подозрительных пользователей:"+str(len(suspicious_users))+"\n")
+    file.write("Список пользователей:"+str(', '.join(suspicious_users))+ "\n")
+    file.write("Общая сумма подозрительных операций:"+str(total_s_operations)+"\n")
 with open('susp_users.json', 'w', encoding='utf-8') as file:
     json.dump(list(suspicious_users), file,indent=4,ensure_ascii=False)
 print("json file is ready")

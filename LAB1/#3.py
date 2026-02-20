@@ -26,6 +26,6 @@ def top_k_words(text, k):
     for i in range(min(k,len(items))):
         result.append(items[i][0])
     return result
-text_example = "Яблоко, груша, банан. Банан и груша. Груша — это вкусно."
+text_example = "Яблоко, груша, банан. Банан и груша. Груша."
 k_value = 2
 print(top_k_words(text_example, k_value))

@@ -1,4 +1,3 @@
-
 users=set()
 purchases=0
 sales=0
@@ -37,12 +36,12 @@ for user in spendings:
     if spendings[user] > max_spent:
         max_spent = spendings[user]
         top_user = user
-average=0
 if purchases > 0:
     average=sales / purchases
 with open('report.txt', 'w', encoding='utf-8') as report:
-    report.write(f"Уникальных пользователей: {len(users)}\n")
-    report.write(f"Всего покупок: {purchases}\n")
-    report.write(f"Общая сумма: {sales}\n")
-    report.write(f"Самый активный покупатель: {top_user}\n")
-    report.write(f"Средний чек: {average:.2f}\n")
+    report.write("Уникальных пользователей:" +str(len(users))+"\n")
+    report.write("Всего покупок:"+str(purchases) +"\n")
+    report.write("Общая сумма:"+ str(sales)+"\n")
+    report.write("Самый активный покупатель:" + str(top_user)+"\n")
+    report.write("Средний чек:"+str(average) +"\n")
+print("txt file is ready")
