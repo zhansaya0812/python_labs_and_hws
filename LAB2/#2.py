@@ -36,8 +36,8 @@ else:
 average_d=0
 best_department=0
 for d in departments:
-    sum_=departments[dep][0]
-    count_=departments[dep][1]
+    sum_=departments[d][0]
+    count_=departments[d][1]
     current_average_d=sum_/count_
     print(f"{d}:{current_average_d:.2f}")
     if current_average_d > average_d:
