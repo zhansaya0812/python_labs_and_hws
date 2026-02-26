@@ -24,7 +24,10 @@ with open('transactions.csv', 'r') as file:
     for row in transaction:
         user = row['user_id']
         amount =int(row['amount'])
-        users_count[user]=users_count.get(user,0)+1
+        if user in users_count:
+            users_count[user] += 1
+        else:
+            users_count[user] = 1
         if amount>500000:
             suspicious_operations.append(amount)
             total_s_operations+=amount

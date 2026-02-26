@@ -38,7 +38,10 @@ best_department=0
 for d in departments:
     sum_=departments[d][0]
     count_=departments[d][1]
-    current_average_d=sum_/count_
+    if count_>0:
+        current_average_d=sum_/count_
+    else:
+        current_average_d=0
     print(f"{d}:{current_average_d:.2f}")
     if current_average_d > average_d:
         average_d=current_average_d
@@ -53,7 +56,7 @@ for emp in employees:
 print("Общая средняя зарплата:"+str(average)+"\n")
 print("Отдел с самой высокой средней зарплатой:"+str(best_department)+"\n")
 print("Самый высокооплачиваемый сотрудник:"+str(best_employee['name'])+" - "+ str(best_employee['salary'])+"\n")
-with open('high_salary.csv', mode='w', encoding='utf-8', newline='') as f:
+with open('high_salary.csv', 'w', encoding='utf-8', newline='') as f:
     writer = csv.DictWriter(f, fieldnames=['name', 'department', 'salary'])
     writer.writeheader()
     writer.writerows(avg_employees)

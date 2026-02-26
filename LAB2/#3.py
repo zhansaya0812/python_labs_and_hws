@@ -46,15 +46,26 @@ top_user=""
 for order in orders:
     revenue+=order['total']
     user=order['user']
-    u_orders_count[user]=u_orders_count.get(user,0)+1
+    if user in u_orders_count:
+        u_orders_count[user]+=1
+    else:
+        u_orders_count[user]=1
     items=order['items']
     t_items+=len(items)
     for item in items:
-      frequency[item]=frequency.get(item,0)+1
+        if item in frequency:
+            frequency[item]+=1
+        else:
+            frequency[item]=1
     if order['total']>max_price:
         max_price=order['total']
         top_user=user
-popular_item=max(frequency,key=frequency.get,default="no items")
+popular_item="False"
+max_count=-1
+for item,count in frequency.items():
+    if count>max_count:
+        max_count=count
+        popular_item=item
 result={
     "revenue":revenue,
     "top_user":top_user,
