@@ -12,7 +12,7 @@ data="""
 2026-02-01;user_2;LOGOUT"""
 with open('shop_log.txt','w', encoding='utf-8') as file:
     file.write(data)
-with (open('shop_log.txt',"r",encoding='utf-8') as file):
+with open('shop_log.txt',"r",encoding='utf-8') as file:
     for line in file:
         line = line.strip()
         if not line:
