@@ -4,8 +4,6 @@ users_count={}
 suspicious_users=set()
 suspicious_operations=[]
 total_s_operations=0
-
-
 transactions="""user_id,amount
 
 user_1,5000
@@ -42,12 +40,3 @@ with open('report.txt', 'w',encoding='utf-8') as file:
 with open('susp_users.json', 'w', encoding='utf-8') as file:
     json.dump(list(suspicious_users), file,indent=4,ensure_ascii=False)
 print("json file is ready")
-
-
-
-
-
-
-
-
-
