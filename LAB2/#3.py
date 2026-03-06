@@ -1,4 +1,6 @@
 import json
+from itertools import count
+
 orders=[
   {
     "order_id": 1,
@@ -41,31 +43,20 @@ revenue=0
 u_orders_count={}
 t_items=0
 frequency={}
-max_price=-1
+max_price=0
 top_user=""
 for order in orders:
     revenue+=order['total']
-    user=order['user']
-    if user in u_orders_count:
-        u_orders_count[user]+=1
-    else:
-        u_orders_count[user]=1
     items=order['items']
-    t_items+=len(items)
+    user=order['user']
+    t_items=+len(items)
+    u_orders_count[user]=u_orders_count.get(user,0)+1
     for item in items:
-        if item in frequency:
-            frequency[item]+=1
-        else:
-            frequency[item]=1
+        frequency[item]=frequency.get(item,0)+1
     if order['total']>max_price:
         max_price=order['total']
         top_user=user
-popular_item="False"
-max_count=-1
-for item,count in frequency.items():
-    if count>max_count:
-        max_count=count
-        popular_item=item
+popular_item=max(frequency, key=frequency.get)
 result={
     "revenue":revenue,
     "top_user":top_user,
