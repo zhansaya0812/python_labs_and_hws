@@ -29,4 +29,3 @@ check=[
     for x in numbers
 ]
 print(check)
-#
