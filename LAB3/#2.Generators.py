@@ -39,12 +39,12 @@ def infinite_numbers():
             yield x
         x+=1
 #for x in infinite_numbers():
-    #print(x) infinitive
+    #print(x) infinitive doesnt stop
 g=infinite_numbers()
 for x in g:
     print(x)
     if x=="FizzBuzz":
-        break #until we get FizzBuzz
+        break #stops when we get FizzBuzz
 #or print(next(g))
 #4
 def squares(n):
