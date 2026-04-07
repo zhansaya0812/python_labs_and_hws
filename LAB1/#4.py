@@ -2,7 +2,7 @@ letters="ABCDEFGHIJKLMNOPQRSTUVWXYZ"
 process=lambda s: " ".join(
     map(
         lambda w:w.lower(),
-        filter(
+        filter(7
             lambda w:(
                 sum(1 for c in w if c in letters)==1
                 and w[0] not in letters
