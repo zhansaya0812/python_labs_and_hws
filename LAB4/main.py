@@ -1,4 +1,3 @@
-
 from fastapi import FastAPI
 from fastapi.responses import HTMLResponse
 
@@ -39,7 +38,3 @@ def get_movies():
 def filter_movies(year:int=2004):
     filtered=[m for m in movies if m["year"]>=year]
     return {"filtered_movies": filtered}
-
-
-
-
