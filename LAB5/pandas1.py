@@ -510,9 +510,6 @@ final_df=final_aggregated_report(merged,ordered)
 print(final_df)
 
 app = FastAPI(title="Full OOP + NumPy + Pandas API")
-# -----------------------
-# USE YOUR EXISTING DATA
-# -----------------------
 
 users_list = [u, u2]
 products_list = [p1, p2, p3, p4]
@@ -521,10 +518,6 @@ orders_list=[order3,order4]
 @app.get("/")
 def home():
     return {"message": "Project API is running"}
-
-# -----------------------
-# USERS / PRODUCTS / ORDERS
-# -----------------------
 
 @app.get("/users")
 def get_users():
@@ -540,11 +533,6 @@ def get_orders():
         {"order_id": o.id, "user": o.user._name, "total": o.total_price()}
         for o in ordered
     ]
-
-# -----------------------
-# BLOCK 1 (OOP FEATURES)
-# -----------------------
-
 @app.get("/user/str")
 def user_str():
     return str(u)
@@ -585,10 +573,6 @@ def stream_prices():
 def order_iterator():
     it = OrderIterator([order, order2])
     return [str(o) for o in it]
-
-# -----------------------
-# NUMPY BLOCK
-# -----------------------
 
 @app.get("/prices/array")
 def prices_array():
@@ -631,10 +615,6 @@ def avg_orders():
 @app.get("/orders/expensive-indices")
 def expensive_indices():
     return expensive_order_indices(orders_2d(orders_list)).tolist()
-
-# -----------------------
-# PANDAS BLOCK
-# -----------------------
 
 @app.get("/df/users")
 def df_users():
@@ -759,10 +739,6 @@ def sort_users_api():
 
     combined = pd.merge(grouped_sum, grouped_mean, on="user_name")
     return sort_users(combined).to_dict()
-
-# -----------------------
-# FINAL REPORT (TASK 45)
-# -----------------------
 
 @app.get("/report")
 def final_report():
