@@ -130,7 +130,7 @@ class Player:
         return self._inventory
 
 
-# #7 наследование
+# #7
 class Warrior(Player):
 
     def handle_event(self, event: Event):
@@ -232,52 +232,34 @@ def damage_stream(events):
 
 
 # #12
-def generate_events(players, items, n):
-
-    types = ["ATTACK", "HEAL", "LOOT"]
-
-    events = []
-
+def generate_events(players,items,n):
+    types=["ATTACK","HEAL","LOOT"]
+    events=[]
     for player in players:
-
         for _ in range(n):
-
-            t = random.choice(types)
-
-            if t == "ATTACK":
-                data = {"damage": random.randint(5, 20)}
-
+            t=random.choice(types)
+            if t =="ATTACK":
+                data={"damage":random.randint(5,20)}
             elif t == "HEAL":
-                data = {"heal": random.randint(5, 15)}
-
+                data={"heal":random.randint(5,15)}
             else:
-                data = {"item": random.choice(items)}
-
+                data={"item":random.choice(items)}
             events.append(Event(t, data))
-
     return events
-
 
 # #13
 def analyze_logs(events):
-
-    total_damage = sum(
-        e.data.get("damage", 0)
-        for e in events
-        if e.type == "ATTACK"
-    )
-
-    most_common = Counter(
-        e.type for e in events
-    ).most_common(1)
-
-    return {
-        "total_damage": total_damage,
-        "most_common_event":
-            most_common[0][0] if most_common else None
+    total_damage=sum(e.data.get("damage", 0) for e in events if e.type == "ATTACK")
+    most_common=Counter(e.type for e in events).most_common(1)
+    player_damage={
+        name:sum(e.data.get("damage",0) for e in events if e.data.get("player_name")==name)
+        for name in {e.data.get("player_name") for e in events if "player_name" in e.data}
     }
-
-
+    return {
+        "total_damage":total_damage,
+        "top_player":max(player_damage,key=player_damage.get) if player_damage else None,
+        "most_common_event":Counter(e.type for e in events).most_common(1)[0][0] if events else None
+    }
 # #14
 decide_action = lambda hp, inventory: (
     "HEAL" if hp < 20
