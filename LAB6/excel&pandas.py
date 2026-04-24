@@ -56,7 +56,7 @@ result = df.groupby('col_7').agg(
 ).reset_index().rename(columns={'col_7': 'category'})
 print(result)
 
-#6 — исправлено: убрана col_7 (текстовая)
+#6
 num_only_cols = df.select_dtypes(include='number').columns[:9].tolist()
 stats = df[num_only_cols].agg(['mean', 'median', 'std']).T.reset_index()
 stats.columns = ['column', 'mean', 'median', 'std']
@@ -69,7 +69,7 @@ anomalies = df[df['col_2'] > mean + 3 * std]
 print(f"Аномальных товаров: {len(anomalies)}")
 print(anomalies.head())
 
-#8 — исправлено: убрана col_7
+#8
 num_only_cols = df.select_dtypes(include='number').columns[:9].tolist()
 corr_matrix = df[num_only_cols].corr()
 print(corr_matrix.round(2))
@@ -106,7 +106,7 @@ sns.pairplot(df[cols12], hue='col_7')
 plt.suptitle('Парные диаграммы по категориям', y=1.02)
 plt.show()
 
-#13 — исправлено: убрана col_7
+#13
 num_only_cols = df.select_dtypes(include='number').columns[:9].tolist()
 corr = df[num_only_cols].corr()
 plt.figure(figsize=(10, 8))
@@ -114,7 +114,7 @@ sns.heatmap(corr, annot=True, fmt='.2f', cmap='coolwarm')
 plt.title('Тепловая карта корреляции')
 plt.show()
 
-#14 — исправлено: убраны дубликаты колонок
+#14
 df.to_excel('catalog_analysis.xlsx', index=False)
 print("Файл сохранён: catalog_analysis.xlsx")
 
