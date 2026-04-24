@@ -41,7 +41,7 @@ print(df[num_cols].dtypes)
 #3
 df['total_value'] = df['col_2'] * df['col_3']
 df['double_stock'] = df['col_4'] * 2
-df['log_price'] = np.log(df['col_2'].replace(0, np.nan))  # исправлено: защита от нулей
+df['log_price'] = np.log(df['col_2'].replace(0, np.nan))  #логарифм нуля не определен
 print(df[['col_2', 'col_3', 'col_4', 'total_value', 'double_stock', 'log_price']].head())
 
 #4
