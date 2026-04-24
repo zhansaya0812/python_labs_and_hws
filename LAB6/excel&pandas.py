@@ -7,15 +7,15 @@ import seaborn as sns
 df = pd.read_excel("catalog_products.xlsx")
 print("="*50)
 print(f"Форма DataFrame:{df.shape}")
-print(f"Строк:{df.shape[0]}")
-print(f"Cтолбцов:{df.shape[1]}")
+print(f"Строк:{df.shape[0]}") #строки
+print(f"Cтолбцов:{df.shape[1]}") #столбцы
 print("\nТипы данных:")
 print(df.dtypes.to_string())
 missing = df.isnull().sum()
 missing_only = missing[missing > 0]
 print("\nПропуски (только колонки с пропусками):")
 if missing_only.empty:
-    print("  Пропущенных значений нет.")
+    print("Пропущенных значений нет.")
 else:
     print(missing_only.to_string())
     print(f"\nВсего пропусков: {missing_only.sum()}")
