@@ -6,10 +6,8 @@ import warnings
 warnings.filterwarnings('ignore')
 
 
-# ЗАДАЧА 1
-
+#1
 df = pd.read_excel("hospital_patient_treatment.xlsx")
-
 print("\nТипы данных всех колонок:")
 print(df.dtypes)
 
@@ -24,7 +22,6 @@ else:
     numeric_cols = df.select_dtypes(include=[np.number]).columns
     for col in missing_cols.index:
         if col in numeric_cols:
-            # ИСПРАВЛЕНО: убран inplace=True (устарел в новых версиях pandas)
             df[col] = df[col].fillna(df[col].mean())
             print(f"  → Колонка '{col}' заполнена средним значением.")
 
@@ -45,9 +42,7 @@ print("\nСтатистика по activity_score:")
 print(df["activity_score"].describe().round(2))
 
 
-
-# ЗАДАЧА 2
-
+#2
 total_procedures = (
     df["Lab_Test_Count"] +
     df["Physical_Therapy_Sessions"] +
@@ -74,15 +69,9 @@ print("\nПервые 10 пациентов (Patient_ID, сумма процед
 print(filtered_df[["Patient_ID", "total_procedures", "Treatment_Cost"]].head(10).to_string(index=False))
 
 
-
-# ЗАДАЧА 3
-
+#3
 def high_activity_patients(df, min_total_sessions, min_cost):
-    """
-    Возвращает DataFrame пациентов, у которых сумма процедур
-    (Lab_Test_Count + Medication_Count + Physical_Therapy_Sessions)
-    >= min_total_sessions и Treatment_Cost >= min_cost.
-    """
+
     total = (
         df["Lab_Test_Count"] +
         df["Medication_Count"] +
@@ -99,9 +88,7 @@ print("\nПервые 10 строк результата:")
 print(result_df[["Patient_ID", "total_procedures", "Treatment_Cost", "Department"]].head(10).to_string(index=False))
 
 
-
-# ЗАДАЧА 4
-
+#4
 mask = (
     (df["Lab_Test_Count"] + df["Medication_Count"] + df["Physical_Therapy_Sessions"] >= 10) &
     (df["Days_in_Hospital"] <= 5)
@@ -113,9 +100,7 @@ print("Первые 10 элементов:")
 print(short_stay_active[:10])
 
 
-
-# ЗАДАЧА 5
-
+#5
 df["treatment_efficiency"] = df.apply(
     lambda row: (
         row["Lab_Test_Count"] + row["Medication_Count"] + row["Physical_Therapy_Sessions"]
@@ -132,8 +117,7 @@ print("\nТоп-10 пациентов с наибольшей treatment_efficien
 print(top10_efficiency.to_string(index=False))
 
 
-# ЗАДАЧА 6
-
+#6
 categories = []
 for val in df["treatment_efficiency"]:
     if val >= 2:
@@ -153,9 +137,7 @@ dept_cat = df.groupby(["Department", "patient_category"]).size().unstack(fill_va
 print(dept_cat)
 
 
-
-# ЗАДАЧА 7
-
+#7
 class HospitalPatient:
     def __init__(self, patient_id, lab_test_count, medication_count,
                  physical_therapy_sessions, treatment_cost):
@@ -194,9 +176,7 @@ for patient in patient_objects:
     print(f"  {patient.patient_id}: {patient.efficiency():.4f}")
 
 
-
-# ЗАДАЧА 8
-
+#8
 def pivot_analysis(df, index_col, value_col):
 
     pivot = df.pivot_table(
@@ -213,13 +193,10 @@ print("\nСредняя treatment_efficiency по Department и Treatment_Type:"
 print(pivot_result.to_string())
 
 pivot_result.to_csv("student5_treatment_efficiency.csv")
-print("\nРезультат сохранён в student5_treatment_efficiency.csv")
 
 
-
-# ЗАДАЧА 9
+#9
 color_map = {"Premium": "#2ecc71", "Standard": "#3498db", "Low": "#e74c3c"}
-
 
 df["total_procedures"] = (
     df["Lab_Test_Count"] + df["Medication_Count"] + df["Physical_Therapy_Sessions"]
@@ -248,14 +225,12 @@ ax.grid(True, linestyle="--", alpha=0.4)
 plt.tight_layout()
 plt.savefig("student5_scatter_cost_vs_procedures.png", dpi=150)
 plt.close()
-print("График сохранён: student5_scatter_cost_vs_procedures.png")
 
 
-
-# ЗАДАЧА 10
+#10
 sns.set_theme(style="whitegrid", palette="muted")
 
-# --- Countplot: patient_category по Department ---
+#Countplot: patient_category по Department ---
 fig, ax = plt.subplots(figsize=(12, 6))
 sns.countplot(
     data=df,
@@ -272,9 +247,9 @@ ax.legend(title="Категория пациента")
 plt.tight_layout()
 plt.savefig("student5_countplot_categories_by_dept.png", dpi=150)
 plt.close()
-print("График сохранён: student5_countplot_categories_by_dept.png")
 
-# --- Boxplot: treatment_efficiency по Treatment_Type ---
+
+#Boxplot: treatment_efficiency по Treatment_Type
 fig, ax = plt.subplots(figsize=(10, 6))
 sns.boxplot(
     data=df,
@@ -289,10 +264,8 @@ ax.set_ylabel("treatment_efficiency", fontsize=11)
 plt.tight_layout()
 plt.savefig("student5_boxplot_efficiency_by_type.png", dpi=150)
 plt.close()
-print("График сохранён: student5_boxplot_efficiency_by_type.png")
 
-# --- Heatmap корреляций числовых показателей ---
-# ИСПРАВЛЕНО: проверяем наличие колонок перед использованием (защита от KeyError)
+
 all_numeric_features = [
     "Lab_Test_Count", "Medication_Count", "Physical_Therapy_Sessions",
     "Treatment_Cost", "Days_in_Hospital", "treatment_efficiency",
@@ -316,8 +289,3 @@ ax.set_title("Матрица корреляций числовых показа�
 plt.tight_layout()
 plt.savefig("student5_heatmap_correlations.png", dpi=150)
 plt.close()
-print("График сохранён: student5_heatmap_correlations.png")
-
-print("\n" + "="*55)
-print("Все задачи выполнены успешно.")
-print("="*55)
