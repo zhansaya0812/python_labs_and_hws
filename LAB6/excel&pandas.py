@@ -4,48 +4,45 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 
 #1
-df = pd.read_excel("catalog_products.xlsx")
+df=pd.read_excel("catalog_products.xlsx")
+pd.set_option("display.max_columns",None)
+pd.set_option("display.width",200)
 print("="*50)
-print(f"Форма DataFrame:{df.shape}")
-print(f"Строк:{df.shape[0]}") #строки
-print(f"Cтолбцов:{df.shape[1]}") #столбцы
+print(f"Форма DataFrame{df.shape}")
+print(f"Cтроки:{df.shape[0]}")
+print(f"Столбцы:{df.shape[1]}")
 print("\nТипы данных:")
-print(df.dtypes.to_string())
-missing = df.isnull().sum()
-missing_only = missing[missing > 0]
-print("\nПропуски (только колонки с пропусками):")
+print(df.dtypes.to_string)
+missing=df.isnull().sum()
+missing_only=missing[missing>0]
+print("\nПропуски:")
 if missing_only.empty:
-    print("Пропущенных значений нет.")
+    print("Пропущенных нет.")
 else:
-    print(missing_only.to_string())
-    print(f"\nВсего пропусков: {missing_only.sum()}")
-    print(f"Колонок с пропусками: {len(missing_only)}")
+    print(missing_only.to_string)
+    print(f"Всего пропусков:{missing_only.sum()}")
 print("\nПервые 5 строк:")
-pd.set_option("display.max_columns", None)
-pd.set_option("display.width", 200)
 print(df.head())
-
 #2
 for col in df.columns:
     try:
-        df[col] = df[col].astype(float)
+        df[col]=df[col].astype(float)
     except:
         pass
-num_cols = df.select_dtypes(include='number').columns
-df[num_cols] = df[num_cols].fillna(df[num_cols].mean())
-print("Пропуски в числовых колонках после заполнения:")
+num_cols=df.select_dtypes(include='number').columns
+df[num_cols]=df[num_cols].fillna(df[num_cols].mean())
+print("\nПропуски после очистки:")
 print(df[num_cols].isnull().sum())
-print("\nТипы числовых колонок после преобразования:")
+print("\nТипы:")
 print(df[num_cols].dtypes)
-
 #3
-df['total_value'] = df['col_2'] * df['col_3']
-df['double_stock'] = df['col_4'] * 2
-df['log_price'] = np.log(df['col_2'].replace(0, np.nan))  #логарифм нуля не определен
-print(df[['col_2', 'col_3', 'col_4', 'total_value', 'double_stock', 'log_price']].head())
-
+df['total_value']=df['col_2']*df['col_3']
+df['double_stock']=df['col_4']*2
+df['log_price']=np.log(df['col_2'].replace(0,np.nan))
+print("Новые строки")
+print(df[['col_2','col_3','total_value','double_stock','log_price']].head())
 #4
-electronics_expensive = df[(df['col_2'] > 500) & (df['col_7'] == 'Electronics')]
+electronics_expensive=df[(df['col_2']>500)&(df['col_7']=="Electronics")]
 print(electronics_expensive.head())
 
 #5

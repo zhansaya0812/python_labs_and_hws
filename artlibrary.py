@@ -12,3 +12,4 @@ tprint("DIAR")
 art_=art("woman",number=2)
 print(art_)
 print(art("random"))
+#
