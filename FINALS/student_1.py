@@ -26,6 +26,7 @@ except Exception as e:
 
 #2
 #1. Находим уникальные значения в колонке Treatment_Type и сохраняем в список
+df = pd.read_excel("hospital_patient_treatment.xlsx")
 treatment_types_list = df['Treatment_Type'].unique().tolist()
 #2. Находим уникальные значения в колонке Department и сохраняем в список
 departments_list = df['Department'].unique().tolist()
