@@ -7,6 +7,7 @@ warnings.filterwarnings('ignore')
 
 
 #1
+print("Задача 1 — Проверка и очистка")
 df = pd.read_excel("hospital_patient_treatment.xlsx")
 print("\nТипы данных всех колонок:")
 print(df.dtypes)
@@ -43,6 +44,7 @@ print(df["activity_score"].describe().round(2))
 
 
 #2
+print("Задача 2 — Фильтрация по комплексным условиям")
 total_procedures = (
     df["Lab_Test_Count"] +
     df["Physical_Therapy_Sessions"] +
@@ -70,6 +72,7 @@ print(filtered_df[["Patient_ID", "total_procedures", "Treatment_Cost"]].head(10)
 
 
 #3
+print("Задача 3 — Повторный анализ")
 def high_activity_patients(df, min_total_sessions, min_cost):
 
     total = (
@@ -89,6 +92,7 @@ print(result_df[["Patient_ID", "total_procedures", "Treatment_Cost", "Department
 
 
 #4
+print("Задача 4 — Comprehension и условные конструкции")
 mask = (
     (df["Lab_Test_Count"] + df["Medication_Count"] + df["Physical_Therapy_Sessions"] >= 10) &
     (df["Days_in_Hospital"] <= 5)
@@ -101,6 +105,7 @@ print(short_stay_active[:10])
 
 
 #5
+print("Задача 5 — Lambda и новые показатели")
 df["treatment_efficiency"] = df.apply(
     lambda row: (
         row["Lab_Test_Count"] + row["Medication_Count"] + row["Physical_Therapy_Sessions"]
@@ -118,6 +123,7 @@ print(top10_efficiency.to_string(index=False))
 
 
 #6
+print("Задача 6 — Циклы и категории пациентов")
 categories = []
 for val in df["treatment_efficiency"]:
     if val >= 2:
@@ -138,6 +144,7 @@ print(dept_cat)
 
 
 #7
+print("Задача 7 — OOP и классы")
 class HospitalPatient:
     def __init__(self, patient_id, lab_test_count, medication_count,
                  physical_therapy_sessions, treatment_cost):
@@ -177,6 +184,7 @@ for patient in patient_objects:
 
 
 #8
+print("Задача 8 — Функции и сводные таблицы")
 def pivot_analysis(df, index_col, value_col):
 
     pivot = df.pivot_table(
@@ -196,6 +204,7 @@ pivot_result.to_csv("student5_treatment_efficiency.csv")
 
 
 #9
+print("Задача 9 — Matplotlib")
 color_map = {"Premium": "#2ecc71", "Standard": "#3498db", "Low": "#e74c3c"}
 
 df["total_procedures"] = (
@@ -228,6 +237,7 @@ plt.close()
 
 
 #10
+print("Задача 10 — Seaborn")
 sns.set_theme(style="whitegrid", palette="muted")
 
 #Countplot: patient_category по Department ---
